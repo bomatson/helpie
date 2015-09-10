@@ -16,8 +16,7 @@ audioManager.start = function(done) {
   audio.on('ready', function() {
     console.log('audio ready');
     audioManager.ready = true;
-    audio.setVolume(Infinity, done);
-    console.log('what');
+    done()
   });
 
   audio.on('error', function(err) {
@@ -37,6 +36,7 @@ audioManager.startRecording = function() {
 }
 
 audioManager.stopRecording = function(done) {
+  if (!audioManager.recording) return;
   console.log('audio stop');
   audioManager.recording = false;
   audio.stopRecording(function() {
@@ -49,6 +49,10 @@ audioManager.stopRecording = function(done) {
 
 audioManager.play = function(data) {
   audio.play(data);
+}
+
+audioManager.setVolume = function(newVal, callback) {
+  audio.setVolume(newVal, callback);
 }
 
 module.exports = audioManager;
