@@ -1,5 +1,5 @@
 var wifi = require('wifi-cc3000');
-var config = require("./config.json");
+var config = require("./config2.json");
 var allowedTimeouts = 0+config.allowedTimouts;
 
 wifiManager = {
@@ -13,7 +13,10 @@ wifiManager = {
       , timeout: config.wifi.timeout || 20
     });
 
-    wifi.on('connect', done);
+    wifi.once('connect', function(){
+      console.log('what')
+      done()
+    });
   }
   ,
   powerCycle: function powerCycle() {
